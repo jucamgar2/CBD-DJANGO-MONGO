@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -73,21 +74,19 @@ WSGI_APPLICATION = "CBD.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-mongoengine.connect(
-    db='cbd',
-    host='localhost',  
-    
-)
+mongoengine.connect(db = 'cbd', host = 'localhost', port = 27017)
 
-DATABASES = {
+'''DATABASES = {
     'default': {
-        'ENGINE': '',
+        'ENGINE': 'djongo',
+        'CLIENT': {
+            'host': 'localhost', 
+            'port': 27017,               
+        },
+        'NAME': 'cbd',
     }
-}
+}'''
 
-MONGOENGINE = {
-    'DEFAULT_CONNECTION_NAME': 'default',
-}
 
 
 # Password validation
