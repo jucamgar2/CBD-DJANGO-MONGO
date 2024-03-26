@@ -76,7 +76,11 @@ WSGI_APPLICATION = "CBD.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 mongoengine.connect(db = 'cbd', host = 'localhost', port = 27017)
 
-'''DATABASES = {
+AUTHENTICATION_BACKENDS = [
+    'mongoengine.django.auth.MongoEngineBackend',
+]
+
+DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT': {
@@ -85,7 +89,7 @@ mongoengine.connect(db = 'cbd', host = 'localhost', port = 27017)
         },
         'NAME': 'cbd',
     }
-}'''
+}
 
 
 

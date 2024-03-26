@@ -1,0 +1,5 @@
+mongoengine
+django-mongoengine
+djongo
+django
+pymongo==3.12.3
