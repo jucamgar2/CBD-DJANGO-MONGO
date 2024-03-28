@@ -2,10 +2,10 @@
     <h1>Inicio de sesión</h1>
     <form action="/login/" method="post">
         {% csrf_token %}
-        <label for="username">Nombre de usuario:</label>
-        <input type="text" id="username" name="username" required>
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required>
+        {{ form.as_p }}
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
         <input type="submit" value="Iniciar sesión">
     </form>
 </HTML:5>
