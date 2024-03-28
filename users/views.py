@@ -2,30 +2,40 @@ from .models import MongoUser
 from django.contrib.auth import login
 from .models import MongoUser
 from django.shortcuts import render, redirect
+from .forms import RegisterForm, LoginForm
 
 # Create your views here.
 def register(request):
-    #if 'user_id' in request.session:
-        #print(request.session['user_id'])
     if request.method == 'POST':
-        username = request.POST['username']
-        email = request.POST['email']
-        password = request.POST['password']
-        user = MongoUser(username=username, email=email, password=password)
-        user.save()
-        return render(request, 'register.html')
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            user = MongoUser(username=username, email=email, password=password)
+            user.save()
+            return redirect('/login')
     else:
-        return render(request, 'register.html')
+        form = RegisterForm()
+    return render(request, 'register.html', {'form': form})
 
 def login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = MongoUser.objects(username=username, password=password).first()
-        if user is not None:
-            request.session['user_id'] = str(user.id)
-            return redirect('/register')
-        else:
-            return render(request, 'login.html', {'error': 'Invalid username or password'})
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = MongoUser.objects.filter(username=username, password=password).first()
+            if user is not None:
+                request.session['user_id'] = str(user.id)
+                return redirect('/')  
+            else:
+                return render(request, 'login.html', {'form': form, 'error': 'Nombre de usuario o contraseña incorrectos.'})
     else:
-        return render(request, 'login.html')
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
+
+def logout(request):
+    if 'user_id' in request.session:
+        del request.session['user_id']
+    return redirect('/')

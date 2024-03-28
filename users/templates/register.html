@@ -16,13 +16,10 @@
         <div class="form-container">
             <form action="/register/" method="post">
                 {% csrf_token %}
-                <h1>Registro</h1>
-                <label for="email">Correo electrónico:</label>
-                <input type="email" id="email" name="email" required>
-                <label for="username">Nombre de usuario:</label>
-                <input type="text" id="username" name="username" required>
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
+                {{ form.as_p }}
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% endif %}
                 <a href="/login/">¿Ya tienes una cuenta? Inicia sesión</a>
                 <input type="submit" value="Registrarse">
             </form>
