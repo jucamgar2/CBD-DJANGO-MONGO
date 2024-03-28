@@ -94,11 +94,11 @@ input[type="submit"]:hover {
     }
 }
 
-@media screen and (max-width: 350px){
+@media screen and (max-width: 490px){
     input[type="text"],
     input[type="password"],
     input[type="email"] {
-        width: 150px;
+        width: 100px;
     }
     input[type="submit"] {
         width: 100px;

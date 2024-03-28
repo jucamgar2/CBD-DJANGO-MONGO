@@ -69,6 +69,11 @@ input[type="password"]{
     text-decoration: underline;
 }
 
+.form-container .error {
+    color: red;
+    margin-bottom: 20px;
+}
+
 input[type="submit"] {
     width: 150px;
     padding: 10px;
@@ -93,10 +98,10 @@ input[type="submit"]:hover {
     }
 }
 
-@media screen and (max-width: 350px){
+@media screen and (max-width: 490px){
     input[type="text"],
     input[type="password"]{
-        width: 150px;
+        width: 100px;
     }
     input[type="submit"] {
         width: 100px;
