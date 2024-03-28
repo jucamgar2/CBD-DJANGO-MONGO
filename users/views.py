@@ -7,7 +7,6 @@ from django.shortcuts import render, redirect
 def register(request):
     #if 'user_id' in request.session:
         #print(request.session['user_id'])
-    print(request.session.get('user_id'))
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
@@ -24,12 +23,9 @@ def login(request):
         password = request.POST['password']
         user = MongoUser.objects(username=username, password=password).first()
         if user is not None:
-            print('Valid login')
-            print(user.id)
             request.session['user_id'] = str(user.id)
             return redirect('/register')
         else:
-            print('Invalid login')
             return render(request, 'login.html', {'error': 'Invalid username or password'})
     else:
         return render(request, 'login.html')
