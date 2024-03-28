@@ -1,11 +1,31 @@
-<HTML:5>
-    <h1>Inicio de sesión</h1>
-    <form action="/login/" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% if error %}
-            <p>{{ error }}</p>
-        {% endif %}
-        <input type="submit" value="Iniciar sesión">
-    </form>
-</HTML:5>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap">
+</head>
+
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="/static/images/logo.png" alt="Logo">
+        </div>
+        <div class="form-container">
+            <h1>Iniciar sesión</h1>
+            <form action="/login/" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if error %}
+                    <p class="error">{{ error }}</p>
+                {% endif %}
+                <a href="/register/">¿No tienes una cuenta? Regístrate</a>
+                <input type="submit" value="Iniciar sesión">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

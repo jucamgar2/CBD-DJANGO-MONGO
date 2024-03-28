@@ -1,8 +1,31 @@
-<HTML:5>
-    <h1>Registro</h1>
-    <form action="/register/" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Registrarse">
-    </form>
-</HTML:5>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <link rel="stylesheet" href="/static/css/register.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap">
+</head>
+
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="/static/images/logo.png" alt="Logo">
+        </div>
+        <div class="form-container">
+            <h1>Registro</h1>
+            <form action="/register/" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% endif %}
+                <a href="/login/">¿Ya tienes una cuenta? Inicia sesión</a>
+                <input type="submit" value="Registrarse">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
