@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from .models import MongoUser
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm
+from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 def register(request):
@@ -12,7 +13,7 @@ def register(request):
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user = MongoUser(username=username, email=email, password=password)
+            user = MongoUser(username=username, email=email, password=make_password(password))
             user.save()
             return redirect('/login')
     else:
@@ -25,8 +26,8 @@ def login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = MongoUser.objects.filter(username=username, password=password).first()
-            if user is not None:
+            user = MongoUser.objects.filter(username=username).first()
+            if user is not None and check_password(password, user.password):
                 request.session['user_id'] = str(user.id)
                 return redirect('/')  
             else:
