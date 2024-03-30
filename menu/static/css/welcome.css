@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.image-container img {
+    width: 200px;
+    height: 200px;
+}
+
+.text-container {
+    margin-left: 20px;
+}
+

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/welcome.css' %}">
+{% endblock %}
+
+{% block extrabody %}
+    <div class="container">
+        <div class="image-container">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+        </div>
+        <div class="text-container">
+            {% if user.is_authenticated %}
+                <h1>¡Bienvenido a Pagepal, {{ user.username }}!</h1>
+            {% else %}
+                <h1>¡Bienvenido a Pagepal!</h1>
+            {% endif %}
+            <p>Pagepal es una aplicación web que te permite reservar libros de tu interés y leerlos en línea.</p>
+        </div>
+    </div>
+{% endblock %}
