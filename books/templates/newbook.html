@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo libro</title>
+    <link rel="stylesheet" href="/static/css/create_book.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap">
+</head>
+
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="/static/images/logo.png" alt="Logo">
+        </div>
+        <div class="form-container">
+            <h1>Nuevo libro</h1>
+            <form action="/register/" method="post">
+                {% csrf_token %}
+                <div>
+                    {{ form.isbn.label_tag }}
+                    {{ form.isbn }}
+                    {% for error in form.isbn.errors %}
+                        <p style="color:red; text-align: center;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                    {% for error in form.title.errors %}
+                        <p style="color:red; text-align: center;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.author.label_tag }}
+                    {{ form.author }}
+                    {% for error in form.author.errors %}
+                        <p style="color:red; text-align: center;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.year.label_tag }}
+                    {{ form.year }}
+                    {% for error in form.year.errors %}
+                        <p style="color:red; text-align: center;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                    {% for error in form.description.errors %}
+                        <p style="color:red; text-align: center;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.genre.label_tag }}
+                    {{ form.genre }}
+                    {% for error in form.genre.errors %}
+                        <p style="color:red; text-align: center;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.pages.label_tag }}
+                    {{ form.pages }}
+                    {% for error in form.pages.errors %}
+                        <p style="color:red; text-align: center;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.language.label_tag }}
+                    {{ form.language }}
+                    {% for error in form.language.errors %}
+                        <p style="color:red; text-align: center;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.show.label_tag }}
+                    {{ form.show }}
+                    {% for error in form.show.errors %}
+                        <p style="color:red; text-align: center;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.image_link.label_tag }}
+                    {{ form.image_link }}
+                    {% for error in form.image_link.errors %}
+                        <p style="color:red; text-align: center;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% endif %}
+                <input type="submit" value="Subir libro">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
