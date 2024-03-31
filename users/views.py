@@ -29,6 +29,8 @@ def login(request):
             user = MongoUser.objects.filter(username=username).first()
             if user is not None and check_password(password, user.password):
                 request.session['user_id'] = str(user.id)
+                request.session['username'] = str(user.username)
+                request.session['is_admin'] = user.is_admin
                 return redirect('/')  
             else:
                 return render(request, 'login.html', {'form': form, 'error': 'Nombre de usuario o contraseña incorrectos.'})
@@ -39,4 +41,6 @@ def login(request):
 def logout(request):
     if 'user_id' in request.session:
         del request.session['user_id']
+        del request.session['username']
+        del request.session['is_admin']
     return redirect('/')
