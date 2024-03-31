@@ -2,9 +2,15 @@ from django.shortcuts import render
 from .forms import BookForm
 from .models import Book
 from django.shortcuts import redirect
+from django.contrib import messages
 
 # Create your views here.
 def create_book(request):
+    if 'is_admin' not in request.session:
+        return redirect('/login')
+    if request.session['is_admin'] == False:
+        messages.warning(request, "Solo los administradores pueden crear nuevos libros.")
+        return redirect('/')
     if request.method == 'POST':
         form = BookForm(request.POST)
         if form.is_valid():
