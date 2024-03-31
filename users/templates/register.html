@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Registro</title>
-    <link rel="stylesheet" href="/static/css/register.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap">
-</head>
+{% block extrahead %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
 
-<body>
+{% block extrabody %}
     <div class="container">
         <div class="image-container">
             <img src="/static/images/logo.png" alt="Logo">
@@ -47,6 +44,4 @@
             </form>
         </div>
     </div>
-</body>
-
-</html>
+{% endblock %}
