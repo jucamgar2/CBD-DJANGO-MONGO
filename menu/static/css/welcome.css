@@ -34,3 +34,29 @@
     align-items: center;
     background-color: #f8f9fa;
 }
+
+@media screen and (max-width: 925px) {
+    .text-container {
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 730px){
+    .text-container {
+        width: 300px;
+    }    
+}
+
+@media screen and (max-width: 510px){
+    .container {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 325px) {
+    .text-container {
+        margin: 0;
+        width: 160px;
+    }
+    
+}

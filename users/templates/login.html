@@ -14,7 +14,25 @@
             <h1>Iniciar sesión</h1>
             <form action="/login/" method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <div>
+                    <div>
+                        {{ form.username.label_tag }}
+                    </div>
+                    {{ form.username }}
+                    {% for error in form.username.errors %}
+                        <p style="color:red; text-align: center;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    <div>
+                        {{ form.password.label_tag }}
+                    </div>
+                    {{ form.password }}
+                    {% for error in form.password.errors %}
+                        <p style="color:red; text-align: center;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                
                 {% if error %}
                     <p class="error">{{ error }}</p>
                 {% endif %}
