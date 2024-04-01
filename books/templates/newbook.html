@@ -16,7 +16,7 @@
                 {% csrf_token %}
                 <div>
                     <div>
-                        {{ form.isbn.label_tag }}
+                    {{ form.isbn.label_tag }}
                     </div>
                     {{ form.isbn }}
                     {% for error in form.isbn.errors %}
@@ -25,8 +25,8 @@
                 </div>
                 <div>
                     <div>
-                        {{ form.title.label_tag }}
-                    </div>    
+                    {{ form.title.label_tag }}
+                    </div>
                     {{ form.title }}
                     {% for error in form.title.errors %}
                         <p style="color:red; text-align: center;">{{ error }}</p>
@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     <div>
-                        {{ form.author.label_tag }}
+                    {{ form.author.label_tag }}
                     </div>
                     {{ form.author }}
                     {% for error in form.author.errors %}
@@ -43,8 +43,8 @@
                 </div>
                 <div>
                     <div>
-                        {{ form.year.label_tag }}
-                    </div>    
+                    {{ form.year.label_tag }}
+                    </div>
                     {{ form.year }}
                     {% for error in form.year.errors %}
                         <p style="color:red; text-align: center;">{{ error }}</p>
@@ -52,7 +52,7 @@
                 </div>
                 <div>
                     <div>
-                        {{ form.description.label_tag }}
+                    {{ form.description.label_tag }}
                     </div>
                     {{ form.description }}
                     {% for error in form.description.errors %}
@@ -61,8 +61,8 @@
                 </div>
                 <div>
                     <div>
-                        {{ form.genre.label_tag }}
-                    </div>    
+                    {{ form.genre.label_tag }}
+                    </div>
                     {{ form.genre }}
                     {% for error in form.genre.errors %}
                         <p style="color:red; text-align: center;">{{ error }}</p>
@@ -70,7 +70,7 @@
                 </div>
                 <div>
                     <div>
-                        {{ form.pages.label_tag }}
+                    {{ form.pages.label_tag }}
                     </div>
                     {{ form.pages }}
                     {% for error in form.pages.errors %}
@@ -79,25 +79,23 @@
                 </div>
                 <div>
                     <div>
-                        {{ form.language.label_tag }}
+                    {{ form.language.label_tag }}
                     </div>
                     {{ form.language }}
                     {% for error in form.language.errors %}
                         <p style="color:red; text-align: center;">{{ error }}</p>
                     {% endfor %}
                 </div>
-                <div>
-                    <div>
-                        {{ form.show.label_tag }}
-                    </div>
+                <div class="form-group">
+                    {{ form.show.label_tag }}
                     {{ form.show }}
-                    {% for error in form.show.errors %}
-                        <p style="color:red; text-align: center;">{{ error }}</p>
-                    {% endfor %}
                 </div>
-                <div>
+                {% for error in form.show.errors %}
+                    <p style="color:red; text-align: center;">{{ error }}</p>
+                {% endfor %}
+                <div class="image-group">
                     <div>
-                        {{ form.image_link.label_tag }}
+                    {{ form.image_link.label_tag }}
                     </div>
                     {{ form.image_link }}
                     {% for error in form.image_link.errors %}

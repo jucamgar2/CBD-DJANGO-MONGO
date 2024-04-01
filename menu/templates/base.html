@@ -14,7 +14,17 @@
 <body>
     <header>
         <nav class="navbar">
-            <a href="/"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
+            <a class="right-arrow"><svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="right-1" d="M10 7L15 12L10 17" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg></a>
+            <aside class="dropleft">
+                <li><a href="/books/">Libros</a></li>
+                <li><a href="/reservation/">Reservar libros</a></li>
+                {% if request.session.is_admin %}
+                    <li><a href="/books/new">Nuevo libro</a></li>
+                {% endif %}
+            </aside>
+            <a class="image" href="/"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
             <ul class="menu">
                 <li><a href="/books/">Libros</a></li>
                 <li><a href="/reservation/">Reservar libros</a></li>
@@ -24,15 +34,31 @@
             </ul>
             <ul class="dropdown-menu">
                 {% if request.session.user_id %}
-                    <li><a href="/profile"><svg class="profile" width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <li><a class="drop"><svg class="dropdown" width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="dropdown-1" d="M4 6H20M4 12H20M4 18H20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg></a>
+                        <ul class="dropdwn">
+                            <li><a href="/profile">Perfil</a></li>
+                            <li><a href="/logout/">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                    <li class="prof"><a href="/profile"><svg class="profile" width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path class="profile-1" opacity="0.4" d="M12.1207 12.78C12.0507 12.77 11.9607 12.77 11.8807 12.78C10.1207 12.72 8.7207 11.28 8.7207 9.50998C8.7207 7.69998 10.1807 6.22998 12.0007 6.22998C13.8107 6.22998 15.2807 7.69998 15.2807 9.50998C15.2707 11.28 13.8807 12.72 12.1207 12.78Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path class="profile-2" opacity="0.34" d="M18.7398 19.3801C16.9598 21.0101 14.5998 22.0001 11.9998 22.0001C9.39977 22.0001 7.03977 21.0101 5.25977 19.3801C5.35977 18.4401 5.95977 17.5201 7.02977 16.8001C9.76977 14.9801 14.2498 14.9801 16.9698 16.8001C18.0398 17.5201 18.6398 18.4401 18.7398 19.3801Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path class="profile-3" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg></a></li>
-                    <li><a href="/logout/">Cerrar sesión</a></li>
+                    <li class="logout"><a href="/logout/">Cerrar sesión</a></li>
                 {% else %}
-                    <li><a href="/login/">Iniciar sesión</a></li>
-                    <li><a href="/register/">Registrarse</a></li>
+                    <li><a class="drop"><svg class="dropdown" width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="dropdown-1" d="M4 6H20M4 12H20M4 18H20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg></a>
+                        <ul class="dropdwn">
+                            <li><a href="/login/">Iniciar sesión</a></li>
+                            <li><a href="/register/">Registrarse</a></li>
+                        </ul>
+                    </li>
+                    <li class="login"><a href="/login/">Iniciar sesión</a></li>
+                    <li class="register"><a href="/register/">Registrarse</a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -44,3 +70,21 @@
     </footer>
 </body>
 </html>
+
+<script>
+    document.querySelector('.drop').addEventListener('click', () => {
+        document.querySelector('.dropdwn').classList.toggle('active');
+    });
+    document.querySelector('.right-arrow').addEventListener('click', () => {
+        document.querySelector('.dropleft').classList.toggle('active');
+    });
+
+    function resize() {
+        if (window.innerWidth > 780) {
+            document.querySelector('.dropdwn').classList.remove('active');
+            document.querySelector('.dropleft').classList.remove('active');
+        }
+    }
+    
+    window.addEventListener('resize', resize);
+</script>
