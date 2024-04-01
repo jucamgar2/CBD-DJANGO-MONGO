@@ -84,7 +84,7 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-@media screen and (max-height: 400px){
+@media screen and (max-height: 500px){
     .container {
         height: 100%;
     }
@@ -101,6 +101,9 @@ input[type="submit"]:hover {
 }
 
 @media screen and (max-width: 490px){
+    .username-group, .email-group {
+        width: 120px;
+    }
     input[type="text"],
     input[type="password"],
     input[type="email"] {
