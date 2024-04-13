@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+{% load static %}
+    <link rel="stylesheet" href="/static/css/reservate.css">
+{% endblock %}
+
+
+{% block extrabody %}
+    <div class="container">
+        <div>
+            <h3>Vas a resevar el libro {{book.title}}</h3>
+            <div class="book-image-container">
+                <div>
+                    <img src="{{book.image_link}}" alt="book image">
+                </div>
+            </div>
+        </div>
+        <div class="form-container">
+            <h1>Reservar libro</h1>
+            <form action="/reservations/reservate/{{book.isbn}}" method="post">
+                {% csrf_token %}
+                <div>
+                    <div>
+                    {{ form.start_date.label_tag }}
+                    </div>
+                    {{ form.start_date }}
+                </div>
+                {% for error in form.start_date.errors %}
+                    <p style="color:red; text-align: center;">{{ error }}</p>
+                {% endfor %}
+                <div>
+                    <div>
+                    {{ form.end_date.label_tag }}
+                    </div>
+                    {{ form.end_date }}
+                    
+                </div>
+                {% for error in form.end_date.errors %}
+                    <p style="color:red; text-align: center;">{{ error }}</p>
+                {% endfor %}
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% endif %}
+                <input type="submit" value="Reservar libro">
+            </form>
+        </div>
+    </div>
+{% endblock %}
