@@ -24,14 +24,11 @@
     align-items: center;
     width: 150px;
     height: 150px;
-    border: 1px solid black;
-    border-radius: 50%;
     margin-bottom: 20px;
 }
 
 .image-container img {
     width: 150px;
-    height: 150px;
 }
 
 .books-container {
@@ -42,7 +39,7 @@
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    padding: 10px;
+    padding-top: 10px;
 }
 
 .book {

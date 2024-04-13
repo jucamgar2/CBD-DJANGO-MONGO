@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField, EmailField, BooleanField
+from mongoengine import Document, StringField, EmailField, BooleanField, FileField
 
 # Create your models here.
 class MongoUser(Document):
@@ -7,7 +7,7 @@ class MongoUser(Document):
     email = EmailField(required=True, unique=True, max_length=200)
     is_active = BooleanField(default=True)
     is_admin = BooleanField(default=False)
-    image_url = StringField(default='https://www.gravatar.com/avatar/')
+    image = FileField()
 
 
     meta = {'collection': 'users'}

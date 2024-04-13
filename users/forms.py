@@ -5,6 +5,16 @@ class RegisterForm(forms.Form):
     username = forms.CharField(label='Nombre de usuario')
     email = forms.EmailField(label='Correo electrónico', max_length=100)
     password = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    image = forms.ImageField(label='Imagen de perfil', required=False)
+
+    def clean_image(self):
+        image = self.cleaned_data['image']
+        if image:
+            if image.size > 2 * 1024 * 1024:
+                raise forms.ValidationError("La imagen no puede pesar más de 2MB.")
+            if image.content_type != 'image/jpeg':
+                raise forms.ValidationError("La imagen debe ser de tipo JPEG.")
+        return image
 
     def clean_username(self):
         username = self.cleaned_data['username']
