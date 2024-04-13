@@ -4,6 +4,7 @@ from .models import MongoUser
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth.hashers import make_password, check_password
+from django.contrib import messages
 
 # Create your views here.
 def register(request):
@@ -44,3 +45,31 @@ def logout(request):
         del request.session['username']
         del request.session['is_admin']
     return redirect('/')
+
+def new_admin(request):
+    if 'is_admin' not in request.session:
+        messages.warning(request, "Debe iniciar sesión como administrador para acceder a esta página.")
+        return redirect('/login')
+    if request.session['is_admin'] == False:
+        messages.warning(request, "Solo los administradores pueden crear nuevos admin.")
+        return redirect('/')
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            user = MongoUser(username=username, email=email, password=make_password(password), is_admin=True)
+            user.save()
+            return redirect('/')
+    else:
+        form = RegisterForm()
+    return render(request, 'admin_register.html', {'form': form})
+
+def get_user(request):
+    user_id = request.session.get('user_id')
+    if user_id is None:
+        messages.warning(request, "Debe iniciar sesión para acceder a esta página.")
+        return redirect('/login')
+    user = MongoUser.objects.filter(id=user_id).first()
+    return render(request, 'profile.html', {'user': user})
