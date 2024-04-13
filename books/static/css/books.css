@@ -102,3 +102,20 @@ input[type="submit"]:hover {
     color: white;
     border-radius: 5px;
 }
+
+@media screen and (max-width: 522px){
+    .container {
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 366px){
+    .pagination .step-links {
+        width: 200px;
+    }
+
+    .pagination .current {
+        display: inline-block;
+        width: 110px;
+    }
+}

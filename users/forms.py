@@ -10,10 +10,10 @@ class RegisterForm(forms.Form):
     def clean_image(self):
         image = self.cleaned_data['image']
         if image:
-            if not image.name.endswith(('.jpg', '.jpeg', '.png', '.webp')):
-                raise forms.ValidationError("Solo se permiten imágenes de formato .jpg, .jpeg, .png o .webp.")
             if image.size > 2 * 1024 * 1024:
-                raise forms.ValidationError("El tamaño de la imagen no puede ser mayor a 2MB.")
+                raise forms.ValidationError("La imagen no puede pesar más de 2MB.")
+            if image.content_type != 'image/jpeg':
+                raise forms.ValidationError("La imagen debe ser de tipo JPEG.")
         return image
 
     def clean_username(self):

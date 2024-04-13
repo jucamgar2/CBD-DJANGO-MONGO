@@ -17,11 +17,10 @@ def register(request):
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
+            user = MongoUser(username=username, email=email, password=make_password(password))
             if 'image' in request.FILES:
                 image = request.FILES['image']
-                user = MongoUser(username=username, email=email, password=make_password(password), image=File(image, image.name))
-            else:
-                user = MongoUser(username=username, email=email, password=make_password(password))
+                user.image.put(image, content_type=image.content_type, filename=image.name)
             user.save()
             return redirect('/login')
     else:
