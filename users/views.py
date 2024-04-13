@@ -5,6 +5,9 @@ from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import messages
+from django.core.files import File
+
+import base64
 
 # Create your views here.
 def register(request):
@@ -14,7 +17,11 @@ def register(request):
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user = MongoUser(username=username, email=email, password=make_password(password))
+            if 'image' in request.FILES:
+                image = request.FILES['image']
+                user = MongoUser(username=username, email=email, password=make_password(password), image=File(image, image.name))
+            else:
+                user = MongoUser(username=username, email=email, password=make_password(password))
             user.save()
             return redirect('/login')
     else:
@@ -72,4 +79,6 @@ def get_user(request):
         messages.warning(request, "Debe iniciar sesión para acceder a esta página.")
         return redirect('/login')
     user = MongoUser.objects.filter(id=user_id).first()
-    return render(request, 'profile.html', {'user': user})
+    image = user['image']
+    image_b64 = base64.b64encode(image.read()).decode('utf-8')
+    return render(request, 'profile.html', {'user': user, 'image': image_b64})

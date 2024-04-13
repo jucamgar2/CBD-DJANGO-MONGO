@@ -3,6 +3,7 @@ from .forms import BookForm
 from .models import Book
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 # Create your views here.
 def create_book(request):
@@ -34,4 +35,9 @@ def create_book(request):
 
 def get_books(request):
     books = Book.objects.all()
+    paginator = Paginator(books, 10)
+
+    page_number = request.GET.get('page')
+    books = paginator.get_page(page_number)
+
     return render(request, 'books.html', {'books': books})
