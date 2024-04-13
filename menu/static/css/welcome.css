@@ -28,6 +28,19 @@
     font-weight: bold;
 }
 
+.success{
+    margin-top: 20px;
+    width: 500px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
 .message-container{
     display: flex;
     justify-content: center;

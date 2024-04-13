@@ -9,9 +9,16 @@
     <div class="message-container">
         {% if messages %}
             {% for message in messages %}
-                <div class="alert">
-                    {{ message }}
-                </div>
+                {% if message.tags == 'warning' %}
+                    <div class="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+                {% if message.tags == 'success' %}
+                    <div class="success">
+                        {{ message }}
+                    </div>
+                {% endif %}
             {% endfor %}
         {% endif %}
     </div>
