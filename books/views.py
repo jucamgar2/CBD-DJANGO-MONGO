@@ -7,6 +7,7 @@ from django.contrib import messages
 # Create your views here.
 def create_book(request):
     if 'is_admin' not in request.session:
+        messages.warning(request, "Debe iniciar sesión como administrador para acceder a esta página.")
         return redirect('/login')
     if request.session['is_admin'] == False:
         messages.warning(request, "Solo los administradores pueden crear nuevos libros.")
@@ -30,3 +31,7 @@ def create_book(request):
     else:
         form = BookForm()    
     return render(request, 'newbook.html', {'form': form})
+
+def get_books(request):
+    books = Book.objects.all()
+    return render(request, 'books.html', {'books': books})

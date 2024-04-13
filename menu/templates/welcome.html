@@ -28,4 +28,23 @@
             <p>Pagepal es una aplicación web que te permite reservar libros de tu interés y leerlos en línea.</p>
         </div>
     </div>
+    <div class="carousel-container">
+        <h2>Libros destacados</h2>
+        <div class="books-container">
+            <input type="radio" name="position" />
+            <input type="radio" name="position" />
+            <input type="radio" name="position" checked />
+            <input type="radio" name="position" />
+            <input type="radio" name="position" />
+            <main id="carousel">
+                {% for book in books %}
+                    <div class="item">
+                        <img src="{{ book.image_link }}" alt="Libro">
+                        <h3 class="name">{{ book.title }}</h3>
+                        <p class="occupation">{{ book.author }}</p>
+                    </div>
+                {% endfor %}
+            </main>
+        </div>
+    </div>
 {% endblock %}

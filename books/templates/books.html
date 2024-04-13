@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/books.css' %}">
+{% endblock %}
+
+{% block extrabody %}
+
+<div class="message-container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div class="container">
+    <div class="text-container">
+        <h1>Libros</h1>
+    </div>
+    <p>Reserva los libros que te interesen y léelos en línea.</p>
+    <div class="books-container">
+        {% for book in books %}
+            <div class="book">
+                <img src="{{ book.image_link }}" alt="Libro">
+                <h3>{{ book.title }}</h3>
+                <p>{{ book.author }}</p>
+                <p>{{ book.description }}</p>
+                <form action="/reservation/{{ book.id }}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Reservar">
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+    
+{% endblock %}
