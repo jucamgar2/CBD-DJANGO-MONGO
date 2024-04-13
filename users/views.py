@@ -79,5 +79,9 @@ def get_user(request):
         return redirect('/login')
     user = MongoUser.objects.filter(id=user_id).first()
     image = user['image']
-    image_b64 = base64.b64encode(image.read()).decode('utf-8')
+    if not image:
+        with open('./users/static/images/book.png', 'rb') as image_file:
+            image_b64 = base64.b64encode(image_file.read()).decode('utf-8')
+    else:
+        image_b64 = base64.b64encode(image.read()).decode('utf-8')
     return render(request, 'profile.html', {'user': user, 'image': image_b64})
