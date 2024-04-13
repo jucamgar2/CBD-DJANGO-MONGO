@@ -217,6 +217,7 @@ input:nth-of-type(5):checked ~ main#carousel {
 @media screen and (max-width: 510px){
     .container {
         flex-direction: column;
+        height: 80vh;
     }
     .alert {
         width: 225px;
