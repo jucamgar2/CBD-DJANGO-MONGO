@@ -35,3 +35,7 @@ def create_book(request):
 def get_books(request):
     books = Book.objects.all()
     return render(request, 'books.html', {'books': books})
+
+def get_book(request, id):
+    book = Book.objects.get(isbn = id)
+    return render(request, 'book.html', {'book': book})

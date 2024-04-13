@@ -1,0 +1,41 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-gap: 20px; 
+    padding: 20px;
+}
+
+.image-book {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-book img{
+    width: 55%;
+    height: auto;
+}
+
+.buttom{
+    width: 150px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buttom:hover{
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+    .image-book img{
+        width: 55%;
+        height: auto;
+    }
+}

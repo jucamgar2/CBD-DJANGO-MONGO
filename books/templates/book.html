@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+{% load static %}
+    <link rel="stylesheet" href="/static/css/book.css">
+{% endblock %}
+
+{% block extrabody %}
+    <div class="container">
+        <div style="text-align: center;">   
+            <h1 style="font-size: 65px;">{{book.title}}</h1>
+        </div>
+
+        <div class="wrapper">
+            <div class="image-book">
+                <img src="{{book.image_link}}" alt="{{book.title}}">
+            </div>
+            <div>
+                <h2>Autor/a: {{book.author}}</h2>
+                <h2>Año: {{book.year}}</h2>
+                <h2>Nº de páginas: {{book.pages}}</h2>
+                <h2>Idioma: {{book.language}}</h2>
+                <h2>ISBN: {{book.isbn}}</h2>
+                <h2>Género: {{book.genre}}</h2>
+                <h2>Descripción: </h2>
+                <h3>{{book.description}}</h3>
+                <div>
+                    <a class="buttom" href="/reservations/reservate/{{book.isbn}}">Reservar libro</a>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
