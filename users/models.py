@@ -7,6 +7,7 @@ class MongoUser(Document):
     email = EmailField(required=True, unique=True, max_length=200)
     is_active = BooleanField(default=True)
     is_admin = BooleanField(default=False)
+    image_url = StringField(default='https://www.gravatar.com/avatar/')
 
 
     meta = {'collection': 'users'}

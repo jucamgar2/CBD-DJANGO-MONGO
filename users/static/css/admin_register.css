@@ -42,7 +42,8 @@ label {
 }
 
 input[type="text"],
-input[type="password"]{
+input[type="password"],
+input[type="email"] {
     width: 300px;
     padding: 10px;
     margin-bottom: 20px;
@@ -60,11 +61,6 @@ input[type="password"]{
     text-decoration: underline;
 }
 
-.form-container .error {
-    color: red;
-    margin-bottom: 20px;
-}
-
 input[type="submit"] {
     width: 150px;
     padding: 10px;
@@ -75,27 +71,17 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+.error-message {
+    color: red;
+    font-size: 14px;
+}
+
+.error-message-container {
+    margin-top: 5px;
+}
+
 input[type="submit"]:hover {
     background-color: #0056b3;
-}
-
-.alert{
-    margin-top: 20px;
-    width: 550px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: red;
-    color: white;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.message-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 @media screen and (max-height: 500px){
@@ -112,17 +98,15 @@ input[type="submit"]:hover {
         width: 200px;
         height: 200px;
     }
-    .alert {
-        width: 235px;
-    }
 }
 
 @media screen and (max-width: 490px){
-    .username-group{
+    .username-group, .email-group {
         width: 120px;
     }
     input[type="text"],
-    input[type="password"]{
+    input[type="password"],
+    input[type="email"] {
         width: 100px;
     }
     input[type="submit"] {

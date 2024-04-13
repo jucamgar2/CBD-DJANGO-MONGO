@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block extrabody %}
+<div class="message-container">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+<div class="container">
+    <div class="data-container">
+        <div class="image-container">
+            <img src="/static/images/book.png" alt="Libro">
+        </div>
+        <p>{{user.username}}</p>
+    </div>
+    <h2>Libros reservados</h2>
+    <div class="books-container">
+        {% if not books %}
+            <p>No has reservado ningún libro</p>
+        {% else %}
+            {% for book in books %}
+                <div class="book">
+                    <img src="{{ book.image.url }}" alt="Libro">
+                    <h3>{{ book.title }}</h3>
+                    <p>{{ book.author }}</p>
+                    <p>{{ book.description }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
