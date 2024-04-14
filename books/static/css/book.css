@@ -16,18 +16,19 @@
     height: auto;
 }
 
-.buttom{
-    width: 150px;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
+.button{
+    background-color: #343a40;
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    width: 100%;
 }
 
-.buttom:hover{
-    background-color: #0056b3;
+.button:hover{
+    background-color: #555;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {

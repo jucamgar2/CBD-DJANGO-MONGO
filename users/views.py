@@ -6,6 +6,8 @@ from .forms import RegisterForm, LoginForm
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import messages
 from django.core.files import File
+from reservations.models import Reservation
+from books.models import Book
 
 import base64
 
@@ -84,4 +86,5 @@ def get_user(request):
             image_b64 = base64.b64encode(image_file.read()).decode('utf-8')
     else:
         image_b64 = base64.b64encode(image.read()).decode('utf-8')
-    return render(request, 'profile.html', {'user': user, 'image': image_b64})
+    reservations = Reservation.objects.filter(user=user)
+    return render(request, 'profile.html', {'user': user, 'image': image_b64, 'reservations': reservations})

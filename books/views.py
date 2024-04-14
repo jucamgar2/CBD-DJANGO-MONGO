@@ -34,7 +34,7 @@ def create_book(request):
     return render(request, 'newbook.html', {'form': form})
 
 def get_books(request):
-
+    books = Book.objects.all()
     paginator = Paginator(books, 10)
 
     page_number = request.GET.get('page')

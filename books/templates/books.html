@@ -27,10 +27,7 @@
                 <img src="{{ book.image_link }}" alt="Libro">
                 <h3>{{ book.title }}</h3>
                 <p>{{ book.author }}</p>
-                <form action="/reservation/{{ book.id }}" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Reservar">
-                </form>
+                <button class="button" onclick="window.location.href = '/books/{{book.isbn}}';">Más detalles</button>
             </div>
         {% endfor %}
     </div>

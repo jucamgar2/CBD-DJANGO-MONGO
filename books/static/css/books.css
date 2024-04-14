@@ -103,6 +103,21 @@ input[type="submit"]:hover {
     border-radius: 5px;
 }
 
+.button{
+    background-color: #343a40;
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.button:hover{
+    background-color: #555;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 522px){
     .container {
         align-items: center;
