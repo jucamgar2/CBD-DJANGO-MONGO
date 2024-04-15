@@ -5,6 +5,8 @@ from books.models import Book
 from django.shortcuts import redirect
 from django.contrib import messages
 from users.models import MongoUser
+from django.utils import timezone
+import json
 
 
 # Create your views here.
@@ -22,7 +24,12 @@ def reservate(request, id):
             reservation.save()
             messages.success(request, "Reserva exitosa.")
             return redirect('/')
-    else:
-        book = Book.objects.get(isbn=id)
-        form = ReservationForm()
-    return render(request, 'reservate.html', {'book': book, 'form': form})   
+    
+    book = Book.objects.get(isbn=id)
+    form = ReservationForm()
+    reservations = Reservation.objects.filter(book = book, end_date__gte = timezone.now())
+    reservations = json.dumps([
+        {'start_date': reservation.start_date.isoformat(), 'end_date': reservation.end_date.isoformat()}
+        for reservation in reservations
+    ])
+    return render(request, 'reservation.html', {'book': book, 'form': form, 'reservations': reservations})   

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/profiles.css' %}">
+{% endblock %}
+
+{% block extrabody %}
+<div style="text-align: center;">
+    <h1>Perfil de {{user.username}}</h1>
+
+    <div class="profile-image">
+        <img src="data:image/jpeg;base64,{{ image }}" alt="Perfil">
+    </div>
+</div>
+
+<div class="profile-container">
+    <div class="text-profile-container">
+        <h1>Tus libros reservados</h1>
+    </div>
+    <div class="profile-books-container">
+        {% if reservations is empty %}
+            <p>No has reservado ningún libro</p>
+        {% else %}
+            {% for reservation in reservations %}
+                <div class="profile-book">
+                    <img src="{{ reservation.book.image_link }}" alt="Libro">
+                    <h3>{{ reservation.book.title }}</h3>
+                    <p>{{ reservation.book.author }}</p>
+                    <p>Fecha de reserva:</p>
+                    <p>{{ reservation.start_date }}</p>
+                    <p>Fecha de devolución:</p>
+                    <p>{{ reservation.end_date }}</p>
+                    <button class="button" onclick="window.location.href = '/books/{{reservation.book.isbn}}';">Más detalles</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

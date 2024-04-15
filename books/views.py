@@ -4,6 +4,9 @@ from .models import Book
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
+from reservations.models import Reservation
+from django.utils import timezone
+import json
 
 # Create your views here.
 def create_book(request):
@@ -44,4 +47,9 @@ def get_books(request):
 
 def get_book(request, id):
     book = Book.objects.get(isbn = id)
-    return render(request, 'book.html', {'book': book})
+    reservations = Reservation.objects.filter(book = book, end_date__gte = timezone.now())
+    reservations = json.dumps([
+        {'start_date': reservation.start_date.isoformat(), 'end_date': reservation.end_date.isoformat()}
+        for reservation in reservations
+    ])
+    return render(request, 'book.html', {'book': book, 'reservations': reservations})

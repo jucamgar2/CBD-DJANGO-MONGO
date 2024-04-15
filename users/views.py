@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.core.files import File
 from reservations.models import Reservation
 from books.models import Book
+from django.utils import timezone
 
 import base64
 
@@ -86,5 +87,5 @@ def get_user(request):
             image_b64 = base64.b64encode(image_file.read()).decode('utf-8')
     else:
         image_b64 = base64.b64encode(image.read()).decode('utf-8')
-    reservations = Reservation.objects.filter(user=user)
-    return render(request, 'profile.html', {'user': user, 'image': image_b64, 'reservations': reservations})
+    reservations = Reservation.objects.filter(user=user, end_date__gte=timezone.now().date()).order_by('end_date')
+    return render(request, 'profiles.html', {'user': user, 'image': image_b64, 'reservations': reservations})
