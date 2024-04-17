@@ -12,6 +12,31 @@
     <div class="profile-image">
         <img src="data:image/jpeg;base64,{{ image }}" alt="Perfil">
     </div>
+    <h2>Tu Pagepal Wrapped</h2>
+    <p>Número de reservas: {{num_of_reservations}}</p>
+    <p>Número de libros leídos: {{num_of_books}}</p>
+    <p>Total de páginas leidas: {{read_pages}}</p>
+    <p>Libros favoritos:
+        <div class="profile-books-container">
+            {% for book in books_counter %}
+                <div style="display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column;
+                margin: 10px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                width: 200px;
+                height: 400px;">
+                    <img style="width: 100px; height: 150px;"  src="{{ book.image_link }}" alt="Libro">
+                    <h3>{{ book.title }}</h3>
+                    <button class="button" onclick="window.location.href = '/books/{{reservation.book.isbn}}';">Más detalles</button>
+                </div>
+            {% endfor %}</p>
+        </div>
+            
+
 </div>
 
 <div class="profile-container">
