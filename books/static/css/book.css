@@ -1,0 +1,42 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-gap: 20px; 
+    padding: 20px;
+}
+
+.image-book {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-book img{
+    width: 55%;
+    height: auto;
+}
+
+.button{
+    background-color: #343a40;
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.button:hover{
+    background-color: #555;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+    .image-book img{
+        width: 55%;
+        height: auto;
+    }
+}

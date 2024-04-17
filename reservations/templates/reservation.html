@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+{% load static %}
+    <link rel="stylesheet" href="/static/css/reservation.css">
+{% endblock %}
+
+{% block extrabody %}
+<div class="container">
+    <div style="text-align: center;">   
+        <h1 style="font-size: 45px;">Vas a reservar el libro{{book.title}}</h1>
+    </div>
+    <div class="wrapper">
+        <div class="image-book">
+            <img src="{{book.image_link}}" alt="{{book.title}}">
+        </div>
+        <div>
+            <form action="/reservations/reservate/{{book.isbn}}" method="post">
+                {% csrf_token %}
+                <div>
+                    <div>
+                    {{ form.start_date.label_tag }}
+                    </div>
+                    {{ form.start_date }}
+                </div>
+                {% for error in form.start_date.errors %}
+                    <p style="color:red; text-align: center;">{{ error }}</p>
+                {% endfor %}
+                <div>
+                    <div>
+                    {{ form.end_date.label_tag }}
+                    </div>
+                    {{ form.end_date }}
+                    
+                </div>
+                {% for error in form.end_date.errors %}
+                    <p style="color:red; text-align: center;">{{ error }}</p>
+                {% endfor %}
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% endif %}
+                <input type="submit" value="Reservar libro">
+            </form>
+        </div>
+
+        
+</div>
+        {% if reservations is empty %}
+            <h3>El libro está disponible</h3>
+        {% else %}
+            <h2>Disponibilidad del libro: </h2>
+            <div id='calendar'></div>
+        {% endif %}
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+        });
+        var reservations = JSON.parse('{{ reservations | escapejs }}');
+        reservations.forEach(function(reservation) {
+            calendar.addEvent({
+                title: 'Reservado',
+                start: reservation.start_date,
+                end: reservation.end_date
+            });
+        });
+        calendar.setOption('height', 650);
+        calendar.render();
+      });
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/profiles.css' %}">
+{% endblock %}
+
+{% block extrabody %}
+<div style="text-align: center;">
+    <h1>Perfil de {{user.username}}</h1>
+
+    <div class="profile-image">
+        <img src="data:image/jpeg;base64,{{ image }}" alt="Perfil">
+    </div>
+    <h2>Tu Pagepal Wrapped</h2>
+    <p>Número de reservas: {{num_of_reservations}}</p>
+    <p>Número de libros leídos: {{num_of_books}}</p>
+    <p>Total de páginas leidas: {{read_pages}}</p>
+    <p>Libros favoritos:
+        <div class="profile-books-container">
+            {% for book in books_counter %}
+                <div style="display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column;
+                margin: 10px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                width: 200px;
+                height: 400px;">
+                    <img style="width: 100px; height: 150px;"  src="{{ book.image_link }}" alt="Libro">
+                    <h3>{{ book.title }}</h3>
+                    <button class="button" onclick="window.location.href = '/books/{{reservation.book.isbn}}';">Más detalles</button>
+                </div>
+            {% endfor %}</p>
+        </div>
+            
+
+</div>
+
+<div class="profile-container">
+    <div class="text-profile-container">
+        <h1>Tus libros reservados</h1>
+    </div>
+    <div class="profile-books-container">
+        {% if reservations is empty %}
+            <p>No has reservado ningún libro</p>
+        {% else %}
+            {% for reservation in reservations %}
+                <div class="profile-book">
+                    <img src="{{ reservation.book.image_link }}" alt="Libro">
+                    <h3>{{ reservation.book.title }}</h3>
+                    <p>{{ reservation.book.author }}</p>
+                    <p>Fecha de reserva:</p>
+                    <p>{{ reservation.start_date }}</p>
+                    <p>Fecha de devolución:</p>
+                    <p>{{ reservation.end_date }}</p>
+                    <button class="button" onclick="window.location.href = '/books/{{reservation.book.isbn}}';">Más detalles</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

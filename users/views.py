@@ -6,6 +6,12 @@ from .forms import RegisterForm, LoginForm
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import messages
 from django.core.files import File
+from reservations.models import Reservation
+from books.models import Book
+from django.utils import timezone
+from datetime import datetime
+from collections import Counter
+from functools import reduce
 
 import base64
 
@@ -84,4 +90,18 @@ def get_user(request):
             image_b64 = base64.b64encode(image_file.read()).decode('utf-8')
     else:
         image_b64 = base64.b64encode(image.read()).decode('utf-8')
-    return render(request, 'profile.html', {'user': user, 'image': image_b64})
+    reservations = Reservation.objects.filter(user=user, end_date__gte=timezone.now().date()).order_by('end_date')
+    current_year = timezone.now().year
+    reservations_in_year = Reservation.objects.filter(user=user,start_date__gte=datetime(current_year, 1, 1, 0, 0, 0),end_date__lte=datetime(current_year, 12, 31, 23, 59, 59))
+    num_of_reservations = Reservation.objects.filter(user=user,start_date__gte=datetime(current_year, 1, 1, 0, 0, 0),end_date__lte=datetime(current_year, 12, 31, 23, 59, 59)).count()
+    reservated_books = Reservation.objects.filter(user=user,start_date__gte=datetime(current_year, 1, 1, 0, 0, 0),end_date__lte=datetime(current_year, 12, 31, 23, 59, 59)).distinct('book')
+    num_of_books = len(reservated_books)
+    read_pages = sum([book.pages for book in reservated_books])
+    books_counter = {}
+    for reservation in reservations_in_year:
+        if reservation.book in books_counter:
+            books_counter[reservation.book] += 1
+        else:
+            books_counter[reservation.book] = 1
+    books_counter = dict(Counter(books_counter).most_common(3))
+    return render(request, 'profiles.html', {'user': user, 'image': image_b64, 'reservations': reservations, 'num_of_reservations': num_of_reservations, 'num_of_books': num_of_books, 'read_pages': read_pages, 'books_counter': books_counter})

@@ -19,7 +19,6 @@
                 </svg></a>
             <aside class="dropleft">
                 <li><a href="/books/">Libros</a></li>
-                <li><a href="/reservation/">Reservar libros</a></li>
                 {% if request.session.is_admin %}
                     <li><a href="/books/new">Nuevo libro</a></li>    
                     <li><a href="/users/admin/new/">Nuevo admin</a></li>
@@ -28,7 +27,6 @@
             <a class="image" href="/"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
             <ul class="menu">
                 <li><a href="/books/">Libros</a></li>
-                <li><a href="/reservation/">Reservar libros</a></li>
                 {% if request.session.is_admin %}
                     <li><a href="/books/new">Nuevo libro</a></li>
                     <li><a href="/users/admin/new/">Nuevo admin</a></li>
