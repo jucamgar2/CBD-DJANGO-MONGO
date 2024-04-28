@@ -9,5 +9,4 @@ class MongoUser(Document):
     is_admin = BooleanField(default=False)
     image = FileField()
 
-
     meta = {'collection': 'users'}

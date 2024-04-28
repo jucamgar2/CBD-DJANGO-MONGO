@@ -4,14 +4,20 @@ from mongoengine import Document, StringField, IntField, BooleanField, EnumField
 # Create your models here.
 
 class Genre(Enum):
-    Poesía = 'Poesía',
-    Romántica = 'Romántica',
-    Fantástica = 'Fantástica',
-    Ciencia_ficción = 'Ciencia ficción',
-    Terror = 'Terror',
-    No_ficción = 'No ficción',
-    Aventuras = 'Aventuras',
-    Crimen = 'Crimen',
+    Poesía = 'Poesía'
+    Romance = 'Romance'
+    Fantástica = 'Fantástica'
+    Ciencia_ficción = 'Ciencia ficción'
+    Terror = 'Terror'
+    No_ficción = 'No ficción'
+    Aventuras = 'Aventuras'
+    Crimen = 'Crimen'
+    Ficción = 'Ficción'
+    Educativo = 'Educativo'
+    Cuento = 'Cuento'
+    Drama = 'Drama'
+    Misterio = 'Misterio'
+    Humor = 'Humor'
 
 
 class Book(Document):

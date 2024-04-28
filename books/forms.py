@@ -1,5 +1,6 @@
 from django import forms
 from .models import Book
+from .models import Genre
 
 class BookForm(forms.Form):
     isbn = forms.CharField(label='ISBN')
@@ -7,7 +8,7 @@ class BookForm(forms.Form):
     author = forms.CharField(label='Autor')
     year = forms.IntegerField(label='Año')
     description = forms.CharField(label='Descripción')
-    genre = forms.ChoiceField(label='Género', choices=(('Ficción', 'Ficción'), ('Ciencia ficción', 'Ciencia ficción'), ('Drama', 'Drama'), ('Misterio', 'Misterio'), ('Romance', 'Romance'), ('Aventuras', 'Aventuras'), ('Terror', 'Terror'), ('Humor', 'Humor'), ('Poesía', 'Poesía'), ('Cuento', 'Cuento'), ('Educativo', 'Educativo'), ('No ficción', 'No ficción'), ('Crimen', 'Crimen')))
+    genre = forms.ChoiceField(label='Género', choices=[(genre.name, genre.value) for genre in Genre])
     pages = forms.IntegerField(label='Páginas')
     language = forms.CharField(label='Idioma')
     show = forms.BooleanField(label='¿Mostrar?')
